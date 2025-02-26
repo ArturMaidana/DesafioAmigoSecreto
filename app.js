@@ -14,9 +14,8 @@ const inputEditarNome = document.getElementById('inputEditarNome');
 const btnSalvarEdicao = document.getElementById('btnSalvarEdicao');
 const btnFecharModal = document.getElementById('btnFecharModal');
 const btnResetar = document.getElementById('btnResetar');
-
-
 let amigos = [];
+let amigosSorteados = []; // Lista para armazenar os amigos sorteados
 let indiceEdicao = null;
 
 function adicionarAmigo() {
@@ -115,6 +114,13 @@ function sortearAmigo() {
         return;
     }
 
+    let amigosDisponiveis = amigos.filter(amigo => !amigosSorteados.includes(amigo)); // Filtra os amigos não sorteados
+
+    if (amigosDisponiveis.length === 0) {
+        alert('Todos os amigos já foram sorteados!');
+        return;
+    }
+
     if (animacaoContagem.checked) {
         contagemRegressiva.classList.remove('hidden');
         let contador = 3;
@@ -126,18 +132,28 @@ function sortearAmigo() {
             } else {
                 clearInterval(intervalo);
                 contagemRegressiva.classList.add('hidden');
-                mostrarResultado();
+                const amigo = realizarSorteio(amigosDisponiveis);
+                mostrarResultado(amigo);
             }
         }, 1000);
     } else {
-        mostrarResultado();
+        const amigo = realizarSorteio(amigosDisponiveis);
+        mostrarResultado(amigo);
     }
 }
 
-function mostrarResultado() {
-    const indiceAleatorio = Math.floor(Math.random() * amigos.length);
-    amigoSorteado.textContent = amigos[indiceAleatorio];
-    resultadoSorteio.classList.remove('hidden');
+function realizarSorteio(amigosDisponiveis) {
+    const indiceAleatorio = Math.floor(Math.random() * amigosDisponiveis.length);
+    const amigoSorteado = amigosDisponiveis[indiceAleatorio];
+    amigosSorteados.push(amigoSorteado);  // Adiciona o amigo sorteado à lista de sorteados
+    return amigoSorteado;
+}
+
+function mostrarResultado(amigo) {
+    if (amigo) {
+        amigoSorteado.textContent = amigo;
+        resultadoSorteio.classList.remove('hidden');
+    }
 }
 
 function fecharResultado() {
@@ -157,6 +173,7 @@ verificarBotaoSortear();
 
 function resetarSorteio() {
     amigos = [];
+    amigosSorteados = [];  // Reseta a lista de amigos sorteados
     indiceEdicao = null;
     listaAmigos.innerHTML = '';
     amigoSorteado.textContent = '';
