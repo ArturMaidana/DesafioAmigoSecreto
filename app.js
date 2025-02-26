@@ -20,21 +20,34 @@ let amigos = [];
 let indiceEdicao = null;
 
 function adicionarAmigo() {
-    const nome = inputAmigo.value.trim();
+    const nomes = inputAmigo.value.trim();
 
-    if (!nome) {
+    if (!nomes) {
         return;
     }
 
-    if (naoRepetir.checked && amigos.includes(nome)) {
-        alert('Este nome já foi adicionado!');
+    const listaDeNomes = nomes.split(',').map(nome => nome.trim()).filter(nome => nome);
+
+    for (let nome of listaDeNomes) {
+        if (naoRepetir.checked && amigos.includes(nome)) {
+            alert(`O nome "${nome}" já foi adicionado!`);
+            return;
+        }
+    }
+
+    const nomesUnicos = new Set([...amigos, ...listaDeNomes]);
+    if (nomesUnicos.size !== amigos.length + listaDeNomes.length) {
+        alert('Existem nomes duplicados!');
         return;
     }
 
-    amigos.push(nome);
+    amigos.push(...listaDeNomes);
+
     renderizarLista();
+
     inputAmigo.value = '';
     inputAmigo.focus();
+
     verificarBotaoSortear();
 }
 
