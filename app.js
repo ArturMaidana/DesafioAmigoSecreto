@@ -14,8 +14,9 @@ const inputEditarNome = document.getElementById('inputEditarNome');
 const btnSalvarEdicao = document.getElementById('btnSalvarEdicao');
 const btnFecharModal = document.getElementById('btnFecharModal');
 const btnResetar = document.getElementById('btnResetar');
+
 let amigos = [];
-let amigosSorteados = []; // Lista para armazenar os amigos sorteados
+let amigosSorteados = [];
 let indiceEdicao = null;
 
 function adicionarAmigo() {
@@ -114,7 +115,7 @@ function sortearAmigo() {
         return;
     }
 
-    let amigosDisponiveis = amigos.filter(amigo => !amigosSorteados.includes(amigo)); // Filtra os amigos não sorteados
+    let amigosDisponiveis = amigos.filter(amigo => !amigosSorteados.includes(amigo));
 
     if (amigosDisponiveis.length === 0) {
         alert('Todos os amigos já foram sorteados!');
@@ -145,7 +146,7 @@ function sortearAmigo() {
 function realizarSorteio(amigosDisponiveis) {
     const indiceAleatorio = Math.floor(Math.random() * amigosDisponiveis.length);
     const amigoSorteado = amigosDisponiveis[indiceAleatorio];
-    amigosSorteados.push(amigoSorteado);  // Adiciona o amigo sorteado à lista de sorteados
+    amigosSorteados.push(amigoSorteado);
     return amigoSorteado;
 }
 
@@ -173,7 +174,7 @@ verificarBotaoSortear();
 
 function resetarSorteio() {
     amigos = [];
-    amigosSorteados = [];  // Reseta a lista de amigos sorteados
+    amigosSorteados = [];
     indiceEdicao = null;
     listaAmigos.innerHTML = '';
     amigoSorteado.textContent = '';
