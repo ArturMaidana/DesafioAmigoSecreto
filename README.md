@@ -26,7 +26,7 @@ sorteio-amigo-secreto/
 │
 ├── index.html          # Arquivo principal HTML
 ├── style.css           # Arquivo de estilos CSS
-├── script.js           # Arquivo de lógica JavaScript
+├── app.js           # Arquivo de lógica JavaScript
 ├── README.md           # Este arquivo
 └── assets/             # Pasta para armazenar imagens ou outros recursos
     └── images/         # Imagens utilizadas no projeto

@@ -34,7 +34,6 @@ body {
 
 footer {
     margin-top: 40px;
-    /* Isso empurra o footer para baixo */
 }
 
 .card-left {
@@ -381,13 +380,11 @@ input:checked+.slider:before {
     display: flex;
     align-items: center;
     gap: 10px;
-    /* Espaço entre o botão e o ícone */
 }
 
 .reset-icon {
     cursor: pointer;
     width: 35px;
-    /* Ajuste conforme necessário */
     height: 35px;
     transition: opacity 0.3s;
 }
